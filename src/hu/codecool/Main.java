@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
 	    createVehicles();
-	    simulateRace();
-	    printRaceResults();
+	    // simulateRace();
+	    // printRaceResults();
     }
 
     private static boolean isRaining() {
