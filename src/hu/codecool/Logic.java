@@ -4,6 +4,19 @@ import java.util.*;
 
 public class Logic {
 
+
+    /*
+        for (int j = 0; j < vehicles[i].distanceTraveled / 100; j++) {
+        System.out.print('*');
+    }
+    try {
+        Runtime.getRuntime().exec("clear");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    */
+
     public static class ValueComparator implements Comparator {
 
         Map map;

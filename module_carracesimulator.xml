@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_carracesimulator" default="compile.module.carracesimulator">
+  <dirname property="module.carracesimulator.basedir" file="${ant.file.module_carracesimulator}"/>
+  
+  <property name="module.jdk.home.carracesimulator" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.carracesimulator" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.carracesimulator" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.carracesimulator" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="carracesimulator.output.dir" value="${module.carracesimulator.basedir}/out/production/CarRaceSimulator"/>
+  <property name="carracesimulator.testoutput.dir" value="${module.carracesimulator.basedir}/out/test/CarRaceSimulator"/>
+  
+  <path id="carracesimulator.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="carracesimulator.module.production.classpath">
+    <path refid="${module.jdk.classpath.carracesimulator}"/>
+  </path>
+  
+  <path id="carracesimulator.runtime.production.module.classpath">
+    <pathelement location="${carracesimulator.output.dir}"/>
+  </path>
+  
+  <path id="carracesimulator.module.classpath">
+    <path refid="${module.jdk.classpath.carracesimulator}"/>
+    <pathelement location="${carracesimulator.output.dir}"/>
+  </path>
+  
+  <path id="carracesimulator.runtime.module.classpath">
+    <pathelement location="${carracesimulator.testoutput.dir}"/>
+    <pathelement location="${carracesimulator.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.carracesimulator">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.carracesimulator">
+    <patternset refid="excluded.from.module.carracesimulator"/>
+  </patternset>
+  
+  <path id="carracesimulator.module.sourcepath">
+    <dirset dir="${module.carracesimulator.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.carracesimulator" depends="compile.module.carracesimulator.production,compile.module.carracesimulator.tests" description="Compile module CarRaceSimulator"/>
+  
+  <target name="compile.module.carracesimulator.production" depends="register.custom.compilers" description="Compile module CarRaceSimulator; production classes">
+    <mkdir dir="${carracesimulator.output.dir}"/>
+    <javac2 destdir="${carracesimulator.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.carracesimulator}/javac">
+      <compilerarg line="${compiler.args.carracesimulator}"/>
+      <bootclasspath refid="carracesimulator.module.bootclasspath"/>
+      <classpath refid="carracesimulator.module.production.classpath"/>
+      <src refid="carracesimulator.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.carracesimulator"/>
+    </javac2>
+    
+    <copy todir="${carracesimulator.output.dir}">
+      <fileset dir="${module.carracesimulator.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.carracesimulator.tests" depends="register.custom.compilers,compile.module.carracesimulator.production" description="compile module CarRaceSimulator; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.carracesimulator" description="cleanup module">
+    <delete dir="${carracesimulator.output.dir}"/>
+    <delete dir="${carracesimulator.testoutput.dir}"/>
+  </target>
+</project>

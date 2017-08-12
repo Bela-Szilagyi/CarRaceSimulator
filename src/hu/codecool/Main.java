@@ -1,6 +1,8 @@
 package hu.codecool;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 // import static hu.codecool.Logic.getCarNames;
 
@@ -53,18 +55,60 @@ public class Main {
 
     private static Car[] simulateRace(Car[] vehicles) {
 
+        int[] raceStat = new int[500];
+
         for (int hour = 1; hour <= 50; hour++) {
-            System.out.println("Hour: " + hour);
+            // System.out.println("Hour: " + hour);
             if (isRaining()) {
-                System.out.println("Raining!");
+                // System.out.println("Raining!");
             } else {
-                System.out.println("Nice and clear!");
+                // System.out.println("Nice and clear!");
             }
             for (int i = 0; i < 10; i++) {
                 vehicles[i].moveForAnHour();
-                System.out.println(vehicles[i].name + " " + vehicles[i].distanceTraveled);
+                // System.out.println(vehicles[i].name + " " + vehicles[i].distanceTraveled);
+                raceStat[(hour-1)*10+i] = (vehicles[i].distanceTraveled);
+                /*
+                //////////
+                for (int j = 0; j < vehicles[i].distanceTraveled / 100; j++) {
+                    System.out.print('*');
+                }
+                System.out.println();
+                // System.out.print("\033[H\033[2J");
+                try {
+                    Runtime.getRuntime().exec("clear");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //////////
+                */
             }
         }
+        ///////////////
+        int counter = 0;
+        for (int hour = 1; hour < 50; hour++) {
+            for (int i = 0; i < 10; i++) {
+                counter = 0;
+                for (int s = 0; s < raceStat[(hour-1)*10+i]/100; s++) {
+                    // System.out.print('*');
+                    counter++;
+                }
+                // System.out.println(counter);
+            }
+            // TimeUnit.SECONDS.sleep(1);
+            /*
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < counter; i++) {
+                // System.out.print("\b");
+            }
+            */
+            // System.out.println();
+        }
+        ///////////////
         return vehicles;
     }
 
@@ -80,6 +124,13 @@ public class Main {
                 (Comparator<Integer>) (o1, o2) -> o2.compareTo(o1)
         );
         result.putAll(race);
-        System.out.println(result);
+        int count = 1;
+        for (Map.Entry<Integer, String> car : result.entrySet()) {
+            Integer key = car.getKey();
+            String value = car.getValue();
+            System.out.println(count + ".: "  + value + ", distance: " + key);
+            count++;
+        }
+        System.out.println(race);
     }
  }
