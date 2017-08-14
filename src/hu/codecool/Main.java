@@ -1,11 +1,7 @@
 package hu.codecool;
 
-import sun.awt.datatransfer.DataTransferer;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static hu.codecool.Motorcycle.createName;
 
 public class Main {
 

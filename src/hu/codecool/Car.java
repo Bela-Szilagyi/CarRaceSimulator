@@ -1,6 +1,10 @@
 package hu.codecool;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Car extends Vehicle {
 
@@ -77,10 +81,4 @@ public class Car extends Vehicle {
         }
         distanceTraveled += speed;
     }
-
-    /*
-    public String getName() {
-        return name;
-    }
-    */
 }

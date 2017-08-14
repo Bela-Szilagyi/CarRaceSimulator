@@ -1,7 +1,5 @@
 package hu.codecool;
 
-import java.util.Random;
-
 public class Vehicle {
 
     public String name;
@@ -13,7 +11,6 @@ public class Vehicle {
     }
 
     public void moveForAnHour(boolean isRaining) {
-        // distanceTraveled += speed;
     }
 
     public String getType() {
