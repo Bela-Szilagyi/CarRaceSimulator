@@ -9,8 +9,6 @@ public class Car {
     public String name;
     int distanceTraveled = 0;
 
-    // ArrayList<String> names =new ArrayList<String>();
-
     public static void setSpeedLimit(int raceSpeedLimit) {
         speedLimit = raceSpeedLimit;
     }
@@ -82,4 +80,9 @@ public class Car {
         return name;
     }
     */
+
+    public int getDistanceTraveled() {
+        return distanceTraveled;
+    }
+
 }

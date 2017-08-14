@@ -1,10 +1,9 @@
 package hu.codecool;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import sun.awt.datatransfer.DataTransferer;
 
-// import static hu.codecool.Logic.getCarNames;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -12,23 +11,12 @@ public class Main {
 
 
     public static void main(String[] args) {
-
+        
         Car.setSpeedLimit(110);
         Car[] vehicles = createVehicles();
         vehicles = simulateRace(vehicles);
         printRaceResults(vehicles);
 
-        /*
-        Map<String, Integer> vehicleStates = new HashMap<String, Integer>();
-        vehicleStates.put("car1", 12);
-        vehicleStates.put("car2", 6);
-        vehicleStates.put("car3", 8);
-        System.out.println(vehicleStates);
-        Comparator<String> comparator = new Logic.ValueComparator(vehicleStates);
-        TreeMap<String, Integer> raceState = new TreeMap<String, Integer>(comparator);
-        raceState.putAll(vehicleStates);
-        System.out.println(raceState);
-        */
     }
 
     private static Car[] createVehicles() {
@@ -58,7 +46,6 @@ public class Main {
         int[] raceStat = new int[500];
 
         for (int hour = 1; hour <= 50; hour++) {
-            // System.out.println("Hour: " + hour);
             if (isRaining()) {
                 // System.out.println("Raining!");
             } else {
@@ -66,25 +53,10 @@ public class Main {
             }
             for (int i = 0; i < 10; i++) {
                 vehicles[i].moveForAnHour();
-                // System.out.println(vehicles[i].name + " " + vehicles[i].distanceTraveled);
                 raceStat[(hour-1)*10+i] = (vehicles[i].distanceTraveled);
-                /*
-                //////////
-                for (int j = 0; j < vehicles[i].distanceTraveled / 100; j++) {
-                    System.out.print('*');
-                }
-                System.out.println();
-                // System.out.print("\033[H\033[2J");
-                try {
-                    Runtime.getRuntime().exec("clear");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //////////
-                */
             }
         }
-        ///////////////
+        /*
         int counter = 0;
         for (int hour = 1; hour < 50; hour++) {
             for (int i = 0; i < 10; i++) {
@@ -96,7 +68,7 @@ public class Main {
                 // System.out.println(counter);
             }
             // TimeUnit.SECONDS.sleep(1);
-            /*
+
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -105,32 +77,28 @@ public class Main {
             for (int i = 0; i < counter; i++) {
                 // System.out.print("\b");
             }
-            */
+
             // System.out.println();
         }
-        ///////////////
+        */
         return vehicles;
     }
 
     private static void printRaceResults(Car[] vehicles) {
 
-        Map<Integer, String> race = new TreeMap<Integer, String>();
-
-        for (int i = 0; i < 10; i++) {
-            race.put(vehicles[i].distanceTraveled, vehicles[i].name);
+        List<Car> cars = new ArrayList<>();
+        for (Car car: vehicles){
+            cars.add(car);
         }
 
-        Map<Integer, String> result = new TreeMap<>(
-                (Comparator<Integer>) (o1, o2) -> o2.compareTo(o1)
-        );
-        result.putAll(race);
-        int count = 1;
-        for (Map.Entry<Integer, String> car : result.entrySet()) {
-            Integer key = car.getKey();
-            String value = car.getValue();
-            System.out.println(count + ".: "  + value + ", distance: " + key);
-            count++;
+        List<String> result = new ArrayList<>();
+        cars.stream()
+                .sorted(Comparator.comparing(Car::getDistanceTraveled).reversed())
+                .forEach(c -> result.add(c.name + " " + c.distanceTraveled));
+
+        int counter = 0;
+        for (String car: result) {
+            System.out.println(++counter + ".: " + car);
         }
-        System.out.println(race);
     }
  }
