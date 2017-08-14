@@ -7,6 +7,9 @@ public class Motorcycle extends Vehicle {
     static int defaultSpeed = 100;
     static int nameNumber = 1;
 
+    public Motorcycle() {
+        type = "Motorcycle";
+    }
 
     @Override
     public void moveForAnHour(boolean isRaining) {
@@ -29,24 +32,3 @@ static nameNumber // The number of the instance created. Used for its name.
         distanceTraveled
         moveForAnHour()
 */
-
-    /*
-    public static void setSpeedLimit(int raceSpeedLimit) {
-        speedLimit = raceSpeedLimit;
-    }
-     */
-
-    /*
-        public void setNormalSpeed() {
-        Random random = new Random();
-        normalSpeed = random.nextInt(31) + 80;
-    }
-     */
-
-    /*
-    public String getName() {
-        return name;
-    }
-    */
-
-

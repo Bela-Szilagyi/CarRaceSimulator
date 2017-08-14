@@ -24,28 +24,8 @@ public class Main {
 
     private static Vehicle[] createVehicles() {
 
-        /*
-        Car[] cars = new Car[10];
-        String[] carNames = Car.createNames();
-        for (int i = 0; i < 10; i++) {
-            Car car = new Car();
-            car.name = carNames[i];
-            car.setNormalSpeed();
-            cars[i] = car;
-        }
-        return cars;
-        */
+        Vehicle[] vehicles = new Vehicle[30];
 
-        /*
-        Motorcycle[] motos = new Motorcycle[10];
-        for (int i = 0; i < 10; i++) {
-            Motorcycle moto = new Motorcycle();
-            moto.name = createName();
-            motos[i] = moto;
-        }
-        return motos;
-        */
-        Vehicle[] vehicles = new Vehicle[20];
         String[] carNames = Car.createNames();
         for (int i = 0; i < 10; i++) {
             Car car = new Car();
@@ -53,11 +33,19 @@ public class Main {
             car.setNormalSpeed();
             vehicles[i] = car;
         }
+
         for (int i = 10; i < 20; i++) {
             Motorcycle moto = new Motorcycle();
-            moto.name = createName();
+            moto.name = Motorcycle.createName();
             vehicles[i] = moto;
         }
+
+        for (int i = 20; i < 30; i++) {
+            Truck truck = new Truck();
+            truck.name = Truck.createName();
+            vehicles[i] = truck;
+        }
+
         return vehicles;
     }
 
@@ -81,7 +69,7 @@ public class Main {
                 // System.out.println("Nice and clear!");
             }
             */
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 30; i++) {
                 vehicles[i].moveForAnHour(isRaining());
                 // raceStat[(hour-1)*10+i] = (vehicles[i].distanceTraveled);
             }
@@ -99,7 +87,7 @@ public class Main {
         List<String> result = new ArrayList<>();
         racers.stream()
                 .sorted(Comparator.comparing(Vehicle::getDistanceTraveled).reversed())
-                .forEach(v -> result.add(v.name + " " + v.distanceTraveled));
+                .forEach(v -> result.add(v.name + " " + v.distanceTraveled + " " + v.getType()));
 
         int counter = 0;
         for (String vehicle: result) {

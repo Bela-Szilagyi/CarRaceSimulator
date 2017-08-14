@@ -7,6 +7,9 @@ public class Car extends Vehicle {
     static int speedLimit;
     int normalSpeed;
 
+    public Car() {
+        type = "Car";
+    }
 
     public static void setSpeedLimit(int raceSpeedLimit) {
         speedLimit = raceSpeedLimit;

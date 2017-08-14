@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class Vehicle {
 
-    // int speed = 0;
     public String name;
     int distanceTraveled = 0;
+    String type;
 
     public int getDistanceTraveled() {
         return distanceTraveled;
@@ -14,5 +14,9 @@ public class Vehicle {
 
     public void moveForAnHour(boolean isRaining) {
         // distanceTraveled += speed;
+    }
+
+    public String getType() {
+        return type;
     }
 }
