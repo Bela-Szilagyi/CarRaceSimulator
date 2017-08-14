@@ -16,13 +16,13 @@ public class Main {
         
         Car.setSpeedLimit(110);
         // Car[] vehicles = createVehicles();
-        Motorcycle[] vehicles = createVehicles();
+        Vehicle[] vehicles = createVehicles();
         vehicles = simulateRace(vehicles);
         printRaceResults(vehicles);
 
     }
 
-    private static Motorcycle[] createVehicles() {
+    private static Vehicle[] createVehicles() {
 
         /*
         Car[] cars = new Car[10];
@@ -35,6 +35,8 @@ public class Main {
         }
         return cars;
         */
+
+        /*
         Motorcycle[] motos = new Motorcycle[10];
         for (int i = 0; i < 10; i++) {
             Motorcycle moto = new Motorcycle();
@@ -42,6 +44,21 @@ public class Main {
             motos[i] = moto;
         }
         return motos;
+        */
+        Vehicle[] vehicles = new Vehicle[20];
+        String[] carNames = Car.createNames();
+        for (int i = 0; i < 10; i++) {
+            Car car = new Car();
+            car.name = carNames[i];
+            car.setNormalSpeed();
+            vehicles[i] = car;
+        }
+        for (int i = 10; i < 20; i++) {
+            Motorcycle moto = new Motorcycle();
+            moto.name = createName();
+            vehicles[i] = moto;
+        }
+        return vehicles;
     }
 
     private static boolean isRaining() {
@@ -52,7 +69,7 @@ public class Main {
             return false;
     }
 
-    private static Motorcycle[] simulateRace(Motorcycle[] vehicles) {
+    private static Vehicle[] simulateRace(Vehicle[] vehicles) {
 
         // int[] raceStat = new int[500];
 
@@ -64,7 +81,7 @@ public class Main {
                 // System.out.println("Nice and clear!");
             }
             */
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 20; i++) {
                 vehicles[i].moveForAnHour(isRaining());
                 // raceStat[(hour-1)*10+i] = (vehicles[i].distanceTraveled);
             }
@@ -72,16 +89,16 @@ public class Main {
         return vehicles;
     }
 
-    private static void printRaceResults(Motorcycle[] vehicles) {
+    private static void printRaceResults(Vehicle[] vehicles) {
 
-        List<Motorcycle> motos = new ArrayList<>();
-        for (Motorcycle moto: vehicles){
-            motos.add(moto);
+        List<Vehicle> racers = new ArrayList<>();
+        for (Vehicle vehicle: vehicles){
+            racers.add(vehicle);
         }
 
         List<String> result = new ArrayList<>();
-        motos.stream()
-                .sorted(Comparator.comparing(Motorcycle::getDistanceTraveled).reversed())
+        racers.stream()
+                .sorted(Comparator.comparing(Vehicle::getDistanceTraveled).reversed())
                 .forEach(v -> result.add(v.name + " " + v.distanceTraveled));
 
         int counter = 0;

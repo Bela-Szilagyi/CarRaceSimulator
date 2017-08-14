@@ -2,12 +2,11 @@ package hu.codecool;
 
 import java.util.*;
 
-public class Car {
+public class Car extends Vehicle {
 
     static int speedLimit;
     int normalSpeed;
-    public String name;
-    int distanceTraveled = 0;
+
 
     public static void setSpeedLimit(int raceSpeedLimit) {
         speedLimit = raceSpeedLimit;
@@ -60,7 +59,8 @@ public class Car {
         return carNames;
     }
 
-    public void moveForAnHour() {
+    @Override
+    public void moveForAnHour(boolean isRaining) {
         Random random = new Random();
         int speed;
         int speedChance = random.nextInt(101);
@@ -80,9 +80,4 @@ public class Car {
         return name;
     }
     */
-
-    public int getDistanceTraveled() {
-        return distanceTraveled;
-    }
-
 }

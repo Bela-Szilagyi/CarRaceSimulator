@@ -2,14 +2,13 @@ package hu.codecool;
 
 import java.util.Random;
 
-public class Motorcycle {
+public class Motorcycle extends Vehicle {
 
     static int defaultSpeed = 100;
     static int nameNumber = 1;
-    String name;
-    int distanceTraveled;
 
 
+    @Override
     public void moveForAnHour(boolean isRaining) {
         Random random = new Random();
         int speed = isRaining ? defaultSpeed - random.nextInt(46) + 5 : defaultSpeed;
@@ -20,10 +19,6 @@ public class Motorcycle {
 
         String name = "Motorcycle " + nameNumber++;
         return name;
-    }
-
-    public int getDistanceTraveled() {
-        return distanceTraveled;
     }
 }
 
