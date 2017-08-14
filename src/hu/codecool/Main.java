@@ -87,11 +87,13 @@ public class Main {
         List<String> result = new ArrayList<>();
         racers.stream()
                 .sorted(Comparator.comparing(Vehicle::getDistanceTraveled).reversed())
-                .forEach(v -> result.add(v.name + " " + v.distanceTraveled + " " + v.getType()));
+                .forEach(v -> result.add(String.format("%-20s", v.name) + " " + v.distanceTraveled + " " + v.getType()));
 
-        int counter = 0;
+        Integer counter = 1;
         for (String vehicle: result) {
-            System.out.println(++counter + ".: " + vehicle);
+            String place = counter.toString() + ".: ";
+            System.out.println(String.format("%-5s", place) + vehicle);
+            counter++;
         }
     }
  }
